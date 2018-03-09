@@ -22,6 +22,7 @@ void Cargando();
 Jugador *jugador;
 void EscenarioInvisible();
 int tipobomba;
+void Juego();
 
 int main(void)
 {
@@ -35,7 +36,7 @@ int main(void)
         {
         case 1:
         {
-            curs_set(0);
+            //curs_set(0);
             move(5, 21);
             printw("Invisible");
             refresh();
@@ -44,8 +45,7 @@ int main(void)
             registro(escenario);
             tipobomba = tipoBomba();
             EscenarioInvisible();
-            Cargando();
-            curs_set(1);
+            //curs_set(1);
             break;
         }
         case 2:
@@ -58,7 +58,6 @@ int main(void)
             escenario = 2;
             registro(escenario);
             tipobomba = tipoBomba();
-            Cargando();
             curs_set(1);
             break;
         }
@@ -326,29 +325,121 @@ void EscenarioInvisible()
     }
     string nombre = "Escenario Invisible";
     int ram;
-    Bombas*bomba;
+    Bombas *bomba;
     ram = (1 + rand() % 4);
-    if(tipobomba==1){
-        bomba=new Normal(ram);
+    if (tipobomba == 1)
+    {
+        bomba = new Normal(ram);
     }
     erase();
     echo();
-    if(tipobomba==2){
-        move(0,0);
+    if (tipobomba == 2)
+    {
+        move(0, 0);
         printw("Ingrese el número de bombas a equipar:");
-        move(1,0);
+        move(1, 0);
         refresh();
         char numb[10];
-        scanw("%s",numb);
-        int num_b=atoi(numb);
-        bomba=new Espina(num_b);
+        scanw("%s", numb);
+        int num_b = atoi(numb);
+        bomba = new Espina(num_b);
     }
-    if(tipobomba==3){
-        bomba=new V();
+    if (tipobomba == 3)
+    {
+        bomba = new V();
     }
+    Cargando();
+    Juego();
+}
 
-    /*for(int i=0; i<11; i++){
-        for(int j=0; j<13; j++){
+void Juego()
+{
+    erase();
+    string player = jugador->toString();
+    char ser = player.at(0);
+    int x, y;
+    int cx = 1;
+    int cy = 1;
+    getmaxyx(stdscr, y, x);
+    move(y / 2, x / 2 - 18);
+    curs_set(0);
+    start_color();
+    int tecla;
+    int direccion = 3;
+    cx = 1;
+    cy = 1;
+    erase();
+    init_pair(2, COLOR_GREEN, COLOR_BLACK);
+    attron(COLOR_PAIR(2));
+    refresh();
+    while (true)
+    {
+        noecho();
+        tecla = getch();
+        //ARRIBA
+        if (tecla == 119)
+        {
+            direccion = 1;
         }
-    }*/
+        //IZQUIERDA
+        if (tecla == 97)
+        {
+            direccion = 2;
+        }
+        //DERECHA
+        if (tecla == 100)
+        {
+            direccion = 3;
+        }
+        //ABAJO
+        if (tecla == 115)
+        {
+            direccion = 4;
+        }
+        echo();
+        if ((cx > 0 && cy > 0) && (cx < 65 && cy < 33))
+        {
+            if (direccion == 1)
+            {
+                cy = cy - 3;
+                move(cy + 3, cx);
+                printw(" ");
+                refresh();
+            }
+            if (direccion == 2)
+            {
+                cx = cx - 5;
+                move(cy, cx + 5);
+                printw(" ");
+                refresh();
+            }
+            if (direccion == 3)
+            {
+                cx = cx + 5;
+                move(cy, cx - 5);
+                printw(" ");
+                refresh();
+            }
+            if (direccion == 4)
+            {
+                cy = cy + 3;
+                move(cy - 3, cx);
+                printw(" ");
+                refresh();
+            }
+            move(cy, cx);
+            printw("%c", ser);
+            refresh();
+        }
+        else
+        {
+            break;
+        }
+    }
+    attroff(COLOR_PAIR(2));
+    move(y / 2, (x / 2 - 4));
+    printw("Perdió!!");
+    refresh();
+    usleep(1000000 / 2);
+    curs_set(1);
 }
