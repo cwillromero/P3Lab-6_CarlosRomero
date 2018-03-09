@@ -6,7 +6,7 @@ using namespace std;
 #ifndef BOMBAS_H
 #define BOMBAS_H
 
-class Bombas{
+class Bombas: public Item{
 
     private:
         int contador;

@@ -7,11 +7,11 @@ using namespace std;
 
 void salir();
 int menu();
-void movimiento();
 int kbhit(void);
 void registro(int);
 int tipobomba();
 void Cargando();
+
 int main(void)
 {
     int z;
@@ -48,7 +48,6 @@ int main(void)
             int tipo = tipobomba();
             Cargando();
             curs_set(1);
-            //movimiento();
             break;
         }
         case 3:
@@ -163,112 +162,6 @@ void salir()
     }
     endwin();
     exit(0);
-}
-
-void movimiento()
-{
-    erase();
-    //vector <char> ser={'*','*','*'};
-    char ser = (char)79;
-    int x, y;
-    int cx = 1;
-    int cy = 1;
-    getmaxyx(stdscr, y, x);
-    move(y / 2, x / 2 - 18);
-    curs_set(0);
-    start_color();
-    init_pair(1, COLOR_GREEN, COLOR_BLACK);
-    attron(COLOR_PAIR(1));
-    printw("Presione ENTER para iniciar el juego.");
-    refresh();
-    attroff(COLOR_PAIR(1));
-    int tecla;
-    tecla = getch();
-    while (tecla != 10)
-    {
-        tecla = getch();
-    }
-    int direccion = 3;
-    cx = x / 2;
-    cy = y / 2;
-    erase();
-    init_pair(2, COLOR_MAGENTA, COLOR_BLACK);
-    attron(COLOR_PAIR(2));
-    keypad(stdscr, TRUE);
-    refresh();
-    while (true)
-    {
-        if (kbhit())
-        {
-            tecla = getch();
-            //ARRIBA
-            if (tecla == KEY_UP)
-            {
-                direccion = 1;
-            }
-            //IZQUIERDA
-            if (tecla == KEY_LEFT)
-            {
-                direccion = 2;
-            }
-            //DERECHA
-            if (tecla == KEY_RIGHT)
-            {
-                direccion = 3;
-            }
-            //ABAJO
-            if (tecla == KEY_DOWN)
-            {
-                direccion = 4;
-            }
-        }
-        if ((cx > 0 && cy > 0) && (cx < x && cy < y))
-        {
-            move(cy, cx);
-            printw("%c", ser);
-            refresh();
-            usleep(1000000 / 5);
-            if (direccion == 1)
-            {
-                cy = cy - 1;
-                move(cy + 1, cx);
-                printw(" ");
-                refresh();
-            }
-            if (direccion == 2)
-            {
-                cx = cx - 1;
-                move(cy, cx + 1);
-                printw(" ");
-                refresh();
-            }
-            if (direccion == 3)
-            {
-                cx = cx + 1;
-                move(cy, cx - 1);
-                printw(" ");
-                refresh();
-            }
-            if (direccion == 4)
-            {
-                cy = cy + 1;
-                move(cy - 1, cx);
-                printw(" ");
-                refresh();
-            }
-        }
-        else
-        {
-            break;
-        }
-    }
-    attroff(COLOR_PAIR(2));
-    keypad(stdscr, FALSE);
-    move(y / 2, (x / 2 - 4));
-    printw("Perdió!!");
-    refresh();
-    usleep(1000000 / 2);
-    curs_set(1);
 }
 
 int kbhit(void)

@@ -11,27 +11,20 @@ using namespace std;
 //Inicio clase
 class Normal: public Bombas{
 
-    //Atributos
     private:
         int alcance;
-
-
-    //metodos publicos
+	string simbolo = "0";
+	string toString();
     public:
-        //prototipos de metodos
-        //constructor
         Normal();
         Normal(int);
-
-        //metodos accersores / mutadores
         int getAlcance();
         void setAlcance(int);
-
-    //Destructor
+	string toString();
     ~Normal();
 
 
-};//Fin de la clase
+};
 
 
 #endif

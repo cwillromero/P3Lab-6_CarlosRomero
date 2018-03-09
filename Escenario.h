@@ -8,8 +8,6 @@ using namespace std;
 #ifndef ESCENARIO_H
 #define ESCENARIO_H
 
-
-//Inicio clase
 class Escenario{
     private:
         string nombre;

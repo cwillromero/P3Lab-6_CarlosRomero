@@ -4,28 +4,28 @@
 
 using namespace std;
 
-//Cosntructor 1
-Normal::Normal(int alcance){
-    this->alcance=alcance;
-}//Fin constructor
+Normal::Normal(int alcance)
+{
+    this->alcance = alcance;
+}
+Normal::Normal()
+{
+}
 
-//Constructor2
-Normal::Normal(){
-
-}//Fin constructor sencillo
-
-int Normal::getAlcance(){
+int Normal::getAlcance()
+{
     return alcance;
 }
 
-void Normal:: setAlcance(int alcance){
-
-    this->alcance=alcance;
-
+void Normal::setAlcance(int alcance)
+{
+    this->alcance = alcance;
 }
 
-Normal::~Normal(){
+Normal::~Normal()
+{
+}
 
-    cout<<"La instancia de Normal fue eliminada";
-
+string Normal::toString(){
+    return simbolo;
 }
