@@ -14,7 +14,6 @@ class Normal: public Bombas{
     private:
         int alcance;
 	string simbolo = "0";
-	string toString();
     public:
         Normal();
         Normal(int);

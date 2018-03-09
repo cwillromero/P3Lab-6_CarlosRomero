@@ -2,26 +2,29 @@
 #include <iostream>
 #include "Item.h"
 #include "Bombas.h"
+#include "Normal.h"
+#include "V.h"
+#include "Espina.h"
 #include <vector>
 using namespace std;
 
 #ifndef ESCENARIO_H
 #define ESCENARIO_H
 
-class Escenario{
-    private:
-        string nombre;
-        Item* matriz[11][13];
-        vector<Bombas*> bombas;
+class Escenario
+{
+  private:
+    string nombre;
+    Item*** Matriz;
+    vector<Bombas *> bombas;
 
-    public:
-        Escenario(string);
-        Escenario();
+  public:
+    Escenario(string, int);
+    Escenario();
+    void setMatrix(Item*, int, int);
+    Item*** getMatrix();
+    void setNombre(string);
 
-        void setNombre(string);
-    
-    ~Item();
-
-
+    ~Escenario();
 };
 #endif

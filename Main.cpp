@@ -4,6 +4,15 @@ using namespace std;
 #include <iostream>
 #include <unistd.h>
 #include <vector>
+#include "Jugador.h"
+#include "Bombas.h"
+#include "Espina.h"
+#include "V.h"
+#include "Normal.h"
+#include "Escenario.h"
+#include "Invisible.h"
+#include "Tren.h"
+#include<stdlib.h>
 
 void salir();
 int menu();
@@ -11,6 +20,8 @@ int kbhit(void);
 void registro(int);
 int tipobomba();
 void Cargando();
+Jugador* jugador;
+void EscenarioInvisible();
 
 int main(void)
 {
@@ -33,6 +44,7 @@ int main(void)
             registro(escenario);
             int tipo = tipobomba();
             Cargando();
+            EscenarioInvisible();
             curs_set(1);
             break;
         }
@@ -215,13 +227,13 @@ void registro(int escenario)
     attron(COLOR_PAIR(2));
     printw("Ingrese su Nombre:");
     attroff(COLOR_PAIR(2));
-
     move(1, 20);
     echo();
     scanw("%s", nombre);
     string name = nombre;
     int estado = 1;
     int tipo = 1;
+    jugador=new Jugador(name,estado,tipo);
 }
 
 int tipobomba()
@@ -327,4 +339,15 @@ void Cargando()
     refresh();
     usleep(1000000 / 2);
     attroff(COLOR_PAIR(1));
+}
+
+
+void EscenarioInvisible(){
+    Item*** Matriz;
+    Matriz=new Item**[13];
+    for(int i=0; i<13; i++){
+        Matriz[i]=new Item*[11];
+    }
+    string nombre="Escenario Invisible";
+    int ram;
 }

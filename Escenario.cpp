@@ -1,16 +1,44 @@
 #include "Escenario.h"
-#include <iostream>
 #include <string>
-
+#include <iostream>
+//#include "Item.h"
+#include "Bombas.h"
+#include "Normal.h"
+#include "V.h"
+#include "Espina.h"
+#include <vector>
 using namespace std;
 
-Escenario::Escenario(string nombre){
+Escenario::Escenario(string nombre, int tipobomba)
+{
+    this->nombre = nombre;
+    if (tipobomba == 1)
+    {
+        bombas.push_back(new Normal() );
+    }
+    if (tipobomba == 1)
+    {
+        bombas.push_back(new V());
+    }
+    if (tipobomba == 1)
+    {
+        bombas.push_back(new Espina());
+    }
+}
+
+Escenario::~Escenario()
+{
+}
+
+void Escenario::setNombre(string nombre)
+{
     this->nombre = nombre;
 }
 
-Escenario:: ~Escenario(){
+Item*** Escenario::getMatrix(){
+    return Matriz;
 }
 
-Escenario::setNombre(string nombre){
-    this->nombre = nombre;
+void Escenario::setMatrix(Item* elemento,int i, int j){
+    Matriz[i][j]=elemento;
 }
