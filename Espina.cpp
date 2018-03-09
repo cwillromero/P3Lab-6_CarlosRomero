@@ -4,9 +4,8 @@
 
 using namespace std;
 
-Espina::Espina(string simbolo,int cantidad){
+Espina::Espina(int cantidad){
     this->simbolo=simbolo;
-    this->cantidad=cantidad;
 }
 
 Espina::Espina(){

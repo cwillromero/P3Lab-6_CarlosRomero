@@ -12,16 +12,16 @@ using namespace std;
 #include "Escenario.h"
 #include "Invisible.h"
 #include "Tren.h"
-#include<stdlib.h>
+#include <stdlib.h>
 
 void salir();
 int menu();
-int kbhit(void);
 void registro(int);
-int tipobomba();
+int tipoBomba();
 void Cargando();
-Jugador* jugador;
+Jugador *jugador;
 void EscenarioInvisible();
+int tipobomba;
 
 int main(void)
 {
@@ -42,9 +42,9 @@ int main(void)
             usleep(1000000);
             escenario = 1;
             registro(escenario);
-            int tipo = tipobomba();
-            Cargando();
+            tipobomba = tipoBomba();
             EscenarioInvisible();
+            Cargando();
             curs_set(1);
             break;
         }
@@ -57,7 +57,7 @@ int main(void)
             usleep(1000000);
             escenario = 2;
             registro(escenario);
-            int tipo = tipobomba();
+            tipobomba = tipoBomba();
             Cargando();
             curs_set(1);
             break;
@@ -176,31 +176,6 @@ void salir()
     exit(0);
 }
 
-int kbhit(void)
-{
-    struct timeval timeout;
-    fd_set readfds;
-    int how;
-
-    /* look only at stdin (fd = 0) */
-    FD_ZERO(&readfds);
-    FD_SET(0, &readfds);
-
-    /* poll: return immediately */
-    timeout.tv_sec = 0L;
-    timeout.tv_usec = 0L;
-
-    how = select(1, &readfds, (fd_set *)NULL, (fd_set *)NULL, &timeout);
-    /* Change "&timeout" above to "(struct timeval *)0"       ^^^^^^^^
-         * if you want to wait until a key is hit
-         */
-
-    if ((how > 0) && FD_ISSET(0, &readfds))
-        return 1;
-    else
-        return 0;
-}
-
 void registro(int escenario)
 {
     erase();
@@ -233,10 +208,10 @@ void registro(int escenario)
     string name = nombre;
     int estado = 1;
     int tipo = 1;
-    jugador=new Jugador(name,estado,tipo);
+    jugador = new Jugador(name, estado, tipo);
 }
 
-int tipobomba()
+int tipoBomba()
 {
     erase();
     refresh();
@@ -341,13 +316,39 @@ void Cargando()
     attroff(COLOR_PAIR(1));
 }
 
-
-void EscenarioInvisible(){
-    Item*** Matriz;
-    Matriz=new Item**[13];
-    for(int i=0; i<13; i++){
-        Matriz[i]=new Item*[11];
+void EscenarioInvisible()
+{
+    Item ***Matriz;
+    Matriz = new Item **[11];
+    for (int i = 0; i < 11; i++)
+    {
+        Matriz[i] = new Item *[13];
     }
-    string nombre="Escenario Invisible";
+    string nombre = "Escenario Invisible";
     int ram;
+    Bombas*bomba;
+    ram = (1 + rand() % 4);
+    if(tipobomba==1){
+        bomba=new Normal(ram);
+    }
+    erase();
+    echo();
+    if(tipobomba==2){
+        move(0,0);
+        printw("Ingrese el número de bombas a equipar:");
+        move(1,0);
+        refresh();
+        char numb[10];
+        scanw("%s",numb);
+        int num_b=atoi(numb);
+        bomba=new Espina(num_b);
+    }
+    if(tipobomba==3){
+        bomba=new V();
+    }
+
+    /*for(int i=0; i<11; i++){
+        for(int j=0; j<13; j++){
+        }
+    }*/
 }

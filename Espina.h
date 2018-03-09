@@ -12,7 +12,7 @@ class Espina: public Bombas{
         int cantidad;
     public:
         Espina();
-        Espina(string,int);
+        Espina(int);
         string getSimbolo();
         void setSimbolo(string);
         int getCantidad();

@@ -9,7 +9,7 @@ using namespace std;
 class Bombas: public Item{
 
     private:
-        int contador;
+        int contador=4;
     public:
 
         Bombas();
