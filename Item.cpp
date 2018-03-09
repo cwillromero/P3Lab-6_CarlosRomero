@@ -1,27 +1,46 @@
+
+#include "Item.h"
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-//Cosntructor 1
-Item::Item(int tipo){
-    this->tipo=tipo;
-}//Fin constructor
-
-//Constructor2
-Item::Item(){
-
-}//Fin constructor sencillo
-
-int Item::getTipo(){
-    return tipo;
+Item::Item(int x, int y)
+{
+    this->x = x;
+    this->y = y;
 }
 
-void Item:: setTipo(int tipo){
-
-    this->tipo=tipo;
-
+Item::Item()
+{
 }
 
-Item::~Item(){
+int Item::getX()
+{
+    return x;
+}
+
+void Item::setX(int x)
+{
+
+    this->x = x;
+}
+
+int Item::getY()
+{
+    return y;
+}
+
+void Item::setY(int y)
+{
+
+    this->y = y;
+}
+
+Item::~Item()
+{
+}
+
+string Item::toString()
+{
 }

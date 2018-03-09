@@ -4,50 +4,54 @@
 
 using namespace std;
 
-//Cosntructor 1
-Jugador::Jugador(string nombre,int estado,int tipo){
-    this->nombre=nombre;
-    this->estado=estado;
-    this->tipo=tipo;
-}//Fin constructor
+Jugador::Jugador(string nombre, int estado, int tipo)
+{
+    this->nombre = nombre;
+    this->estado = estado;
+    this->tipo = tipo;
+}
+Jugador::Jugador()
+{
+}
 
-//Constructor2
-Jugador::Jugador(){
-
-}//Fin constructor sencillo
-
-string Jugador::getNombre(){
+string Jugador::getNombre()
+{
     return nombre;
 }
 
-void Jugador:: setNombre(string nombre){
+void Jugador::setNombre(string nombre)
+{
 
-    this->nombre=nombre;
-
+    this->nombre = nombre;
 }
 
-int Jugador::getEstado(){
+int Jugador::getEstado()
+{
     return estado;
 }
 
-void Jugador:: setEstado(int estado){
+void Jugador::setEstado(int estado)
+{
 
-    this->estado=estado;
-
+    this->estado = estado;
 }
 
-int Jugador::getTipo(){
+int Jugador::getTipo()
+{
     return tipo;
 }
 
-void Jugador:: setTipo(int tipo){
+void Jugador::setTipo(int tipo)
+{
 
-    this->tipo=tipo;
-
+    this->tipo = tipo;
 }
 
-Jugador::~Jugador(){
+Jugador::~Jugador()
+{
+}
 
-    cout<<"La instancia de Jugador fue eliminada";
-
+string Jugador::toString()
+{
+    return simbolo;
 }

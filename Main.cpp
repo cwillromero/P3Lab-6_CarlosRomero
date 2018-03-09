@@ -10,7 +10,8 @@ int menu();
 void movimiento();
 int kbhit(void);
 void registro(int);
-
+int tipobomba();
+void Cargando();
 int main(void)
 {
     int z;
@@ -19,10 +20,6 @@ int main(void)
     {
         erase();
         z = menu();
-        /* char fs[] = "dsffd";
-        printw("%s", fs);
-        refresh();
-        usleep(3000000); */
         switch (z)
         {
         case 1:
@@ -34,6 +31,8 @@ int main(void)
             usleep(1000000);
             escenario = 1;
             registro(escenario);
+            int tipo = tipobomba();
+            Cargando();
             curs_set(1);
             break;
         }
@@ -46,6 +45,8 @@ int main(void)
             usleep(1000000);
             escenario = 2;
             registro(escenario);
+            int tipo = tipobomba();
+            Cargando();
             curs_set(1);
             //movimiento();
             break;
@@ -312,7 +313,7 @@ void registro(int escenario)
     init_pair(4, COLOR_GREEN, COLOR_BLACK);
     attron(COLOR_PAIR(4));
     move(y - 1, 0);
-    printw("Presione Enter Para Iniciar");
+    printw("Presione Enter Para Continuar");
     attroff(COLOR_PAIR(4));
 
     char nombre[100];
@@ -328,7 +329,93 @@ void registro(int escenario)
     string name = nombre;
     int estado = 1;
     int tipo = 1;
+}
 
+int tipobomba()
+{
+    erase();
+    refresh();
+    int x, y;
+    getmaxyx(stdscr, y, x);
+    move(0, (x / 2 - 10));
+    start_color();
+    init_pair(1, COLOR_CYAN, COLOR_WHITE);
+    attron(COLOR_PAIR(1));
+    printw("<<Tipos de Bombas>>");
+    attroff(COLOR_PAIR(1));
+    start_color();
+    init_pair(4, COLOR_GREEN, COLOR_BLACK);
+    attron(COLOR_PAIR(4));
+    move(y - 1, 0);
+    printw("Presione Enter Para Continuar");
+    attroff(COLOR_PAIR(4));
+    curs_set(1);
+    start_color();
+    init_pair(2, COLOR_WHITE, COLOR_BLACK);
+    attron(COLOR_PAIR(2));
+    move(1, 0);
+    printw("Escoja un Tipo de Bomba [Presione Enter]:\n");
+    move(2, 1);
+    printw("1) Normal \n");
+    move(3, 1);
+    printw("2) Espina \n");
+    move(4, 1);
+    printw("3) V \n");
+    attroff(COLOR_PAIR(2));
+    int cx = 0;
+    int cy = 2;
+    int tecla;
+    move(cy, cx);
+    refresh();
+    while (true)
+    {
+        noecho();
+        tecla = getch();
+        if (tecla == 10)
+        {
+            if (cy == 2)
+            {
+                return 1;
+            }
+            if (cy == 3)
+            {
+                return 2;
+            }
+            if (cy == 4)
+            {
+                return 3;
+            }
+        }
+        else
+        {
+            //printw("%i",tecla);
+            if (tecla == 65 && cy > 2)
+            {
+                //printw(" arriba");
+                cy = cy - 1;
+                move(cy, cx);
+            }
+            else if (tecla == 66 && cy < 4)
+            {
+                //printw(" abajo");
+                cy = cy + 1;
+                move(cy, cx);
+            }
+            else
+            {
+                //No hará nada
+            }
+        }
+        refresh();
+    }
+    curs_set(0);
+    echo();
+}
+
+void Cargando()
+{
+    int x, y;
+    getmaxyx(stdscr, y, x);
     erase();
     start_color();
     init_pair(1, COLOR_GREEN, COLOR_BLACK);

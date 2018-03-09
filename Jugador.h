@@ -1,42 +1,32 @@
 #include <string>
 #include <iostream>
+#include "Item.h"
 
 using namespace std;
 
 #ifndef JUGADOR_H
 #define JUGADOR_H
 
+class Jugador: public Item{
 
-//Inicio clase
-class Jugador{
-
-    //Atributos
     private:
         string nombre;
         int estado;
         int tipo;
+	string simbolo="X";
 
-
-    //metodos publicos
     public:
-        //prototipos de metodos
-        //constructor
         Jugador();
         Jugador(string,int,int);
-
-        //metodos accersores / mutadores
         string getNombre();
         void setNombre(string);
         int getEstado();
         void setEstado(int);
         int getTipo();
         void setTipo(int);
-
-    //Destructor
+	string toString();
     ~Jugador();
-
-
-};//Fin de la clase
+};
 
 
 #endif
