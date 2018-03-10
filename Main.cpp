@@ -355,6 +355,18 @@ void EscenarioInvisible()
 void Juego()
 {
     erase();
+    /*for (int i = 0; i < 34; i++)
+    {
+        for (int j = 0; j < 66; i++)
+        {
+            if (i == 0 || i == 33)
+            {
+                move(i, j);
+                printw("+");
+                refresh();
+            }
+        }
+    }*/
     string player = jugador->toString();
     char ser = player.at(0);
     int x, y;
@@ -366,15 +378,32 @@ void Juego()
     start_color();
     int tecla;
     int direccion = 3;
-    cx = 1;
-    cy = 1;
+    cx = 2;
+    cy = 2;
     erase();
     init_pair(2, COLOR_GREEN, COLOR_BLACK);
     attron(COLOR_PAIR(2));
     refresh();
+    for (int i = 0; i < 67; i++)
+    {
+        move(0, i);
+        printw("+");
+        move(35, i);
+        printw("+");
+    }
+    for (int i = 0; i < 35; i++)
+    {
+        move(i, 0);
+        printw("+");
+        move(i, 67);
+        printw("+");
+    }
     while (true)
     {
         noecho();
+        move(cy, cx);
+        printw("%c", ser);
+        refresh();
         tecla = getch();
         //ARRIBA
         if (tecla == 119)
@@ -397,7 +426,7 @@ void Juego()
             direccion = 4;
         }
         echo();
-        if ((cx > 0 && cy > 0) && (cx < 65 && cy < 33))
+        if ((cx > 0 && cy > 0) && (cx < 66 && cy < 33))
         {
             if (direccion == 1)
             {
